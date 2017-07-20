@@ -1,4 +1,4 @@
-Find Open S3 buckets
-=====================
+Find publicly accessible S3 buckets
+===================================
 
-This scripts lists all your buckets that are world readable. It will help you fix S3 security vulnerabilities
+This script helps you find S3 buckets that are publicly accessible. Make sure that you have aws-sdk and python installed and configured for you to use this.
