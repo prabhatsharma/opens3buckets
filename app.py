@@ -15,7 +15,7 @@ for bucket in s3.buckets.all():
 
     for grant in grants:
 
-        openPermissions = grant['Permission'] == 'READ' or grant['Permission'] == 'WRITE' or grant['Permission'] == 'FULL_CONTROL'
+        openPermissions = grant['Permission'] in ['READ', 'WRITE', 'FULL_CONTROL']
 
         if grant['Grantee']['Type'] == "Group" and grant['Grantee']['URI'] == openGranteeURI and openPermissions:
             print('Bucket: ', bucket.name)
