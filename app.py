@@ -1,5 +1,7 @@
 import boto3
+import time
 
+startTime = time.time()
 s3 = boto3.resource('s3')
 s3Client = boto3.client('s3')
 
@@ -18,3 +20,5 @@ for bucket in s3.buckets.all():
         if grant['Grantee']['Type'] == "Group" and grant['Grantee']['URI'] == openGranteeURI and openPermissions:
             print('Bucket: ', bucket.name)
             print('World Permissions: ',  grant['Permission'])
+
+print('open buckets found in: ', round(time.time() - startTime, 2), ' seconds')
