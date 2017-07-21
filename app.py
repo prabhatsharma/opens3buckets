@@ -20,6 +20,7 @@ for bucket in s3.buckets.all():
                 print('Policy for Bucket: ', bucket.name)
                 print("Policy: Resource: ", Statement['Resource'])
                 print("Policy: Action: ", Statement['Action'])
+                print('----------------------------------------------------')
     except:
         bucketPolicy = "No bucket policy"
 
@@ -33,5 +34,6 @@ for bucket in s3.buckets.all():
         if grant['Grantee']['Type'] == "Group" and grant['Grantee']['URI'] == openGranteeURI and openPermissions:
             print('ACL for Bucket: ', bucket.name)
             print('World Permissions: ',  grant['Permission'])
+            print('----------------------------------------------------')
 
 print('open buckets found in: ', round(time.time() - startTime, 2), ' seconds')
