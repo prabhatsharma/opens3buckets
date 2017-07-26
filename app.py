@@ -16,8 +16,9 @@ for bucket in s3.buckets.all():
         bucketPolicy = s3Client.get_bucket_policy(Bucket = bucket.name)
         Statements = json.loads(bucketPolicy['Policy'])['Statement']
         for Statement in Statements:
-            if Statement['Principal'] == "*" and Statement['Effect'] == "Allow":
+            if (Statement['Principal'] == "*" and Statement['Effect'] == "Allow"):
                 print('Policy for Bucket: ', bucket.name)
+                print('Policy: Principal: ', Statement['Principal'])
                 print("Policy: Resource: ", Statement['Resource'])
                 print("Policy: Action: ", Statement['Action'])
                 print('----------------------------------------------------')
@@ -29,10 +30,11 @@ for bucket in s3.buckets.all():
     grants = bucketAcl['Grants']
 
     for grant in grants:
-        openPermissions = grant['Permission'] in ['READ', 'WRITE', 'READ_ACP', 'WRITE_ACP', 'FULL_CONTROL']
+        openPermissions = (grant['Permission'] in ['READ', 'WRITE', 'READ_ACP', 'WRITE_ACP', 'FULL_CONTROL'])
 
-        if grant['Grantee']['Type'] == "Group" and grant['Grantee']['URI'] == openGranteeURI and openPermissions:
+        if (grant['Grantee']['Type'] == "Group" and grant['Grantee']['URI'] == openGranteeURI and openPermissions):
             print('ACL for Bucket: ', bucket.name)
+            print('Grantee: ', grant['Grantee'])
             print('World Permissions: ',  grant['Permission'])
             print('----------------------------------------------------')
 
